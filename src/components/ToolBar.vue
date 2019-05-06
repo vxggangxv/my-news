@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="inner fixed">
-			<h1 class="h-logo"><img src="../assets/logo.png" alt="logo" class="logo"></h1>
+			<h1 class="h-logo"><a href="/"><img src="../assets/logo.png" alt="logo" class="logo"></a></h1>
 			<nav class="gnb">
 				<h1 class="text-hide">GNB 메뉴</h1>
 				<div class="menu">
@@ -25,25 +25,28 @@
 
 <style lang="scss" scoped>
 	.header {
+		position: relative;
+		$z: 10;
 		$ht: 50px;
 		height: $ht;
-		background-color: #42b883;
 		color: #fff;
-		display: flex;
-		align-items: center;
 		&, .inner {
+			z-index: $z;
 			box-sizing: border-box;
 		}
 		.inner {
-			padding: 8px 10px 10px;
+			display: flex;
+			align-items: center;
 			height: $ht;
+			padding: 8px 10px 10px;
+			background-color: #42b883;
 		}
 		.h-logo,
 		.gnb {
-			vertical-align: middle;
+			// vertical-align: middle;
 		}
 		.h-logo {
-			display: inline-block;
+			// display: inline-block;
 			.logo {
 				position: relative;
 				margin-right: 20px;
@@ -57,7 +60,10 @@
 			display: inline-block;
 			.menu {
 				> a {
-					margin: 0 5px;
+					margin: 0 10px;
+          &:first-child {
+            margin-left: 0;
+          }
 					&:active {
 						color: #35495e;
 					}

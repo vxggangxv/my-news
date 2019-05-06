@@ -15,9 +15,10 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   body {
     font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
+    color: $primary-color;
   }
 
   a,

@@ -11,7 +11,9 @@ export default new Vuex.Store({
     state: {
         news: [],
         ask: [],
-        jobs: []
+        jobs: [],
+        user: {},
+        item: {},
     },
     getters,
     mutations,
