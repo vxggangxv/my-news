@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+.sec.post {
+	padding: 5px 10px;
+
+	.post-list {
+		>li {
+			padding: 2.5px 0;
+			line-height: 1.5;
+
+			.row-tit {
+				.domain {
+					margin-left: 5px;
+				}
+			}
+
+			.domain,
+			.row-cmt {
+				font-size: 14px;
+				color: $fg-gray;
+			}
+
+			.row-cmt {
+				padding-left: 17px;
+			}
+		}
+	}
+}

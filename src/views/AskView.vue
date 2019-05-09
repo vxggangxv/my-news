@@ -2,22 +2,20 @@
   <section class="sec post">
     <h1 class="text-hide">뉴스 기사 리스트</h1>
 		<ul class="post-list">
-			<li v-for="ask in this.$store.state.ask" :key="ask.id">
+			<li v-for="(item, index) in this.$store.state.ask" :key="item.id">
         <div class="row-tit">
-          <!-- {{ ask.title }} -->
-          <router-link :to="'/item/' + ask.id">{{ ask.title }}</router-link>
+          {{ index + 1 }}.
+          <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
         </div>
         <div class="row-cmt">
           <small class="">
-            {{ ask.time_ago }} 
+            {{ item.time_ago }} 
             by 
-            <router-link :to="'/user/' + ask.user">{{ ask.user }}</router-link>
+            <router-link :to="'/user/' + item.user">{{ item.user }}</router-link>
           </small>
         </div>
 			</li>
 		</ul>
-
-    {{ this.$store.state.ask }}
   </section>
 </template>
 
@@ -41,22 +39,5 @@
 </script>
 
 <style lang="scss" scoped>
-.sec.post {
-	.post-list {
-    // background: #f6f6ef;
-    padding: 5px 0;
-    > li {
-      padding: 2.5px 10px;
-      line-height: 1.5;
-      .row-tit {
-        .domain {margin-left: 5px;}
-      }
-      .domain,
-      .row-cmt {
-        font-size: 14px;
-        color: #999999;
-      }
-    }
-  }
-}
+  @import '../scss/listview.scss';
 </style>

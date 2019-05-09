@@ -3,13 +3,17 @@
 		<h1 class="text-hide">뉴스 기사 리스트</h1>
     <!-- {{ this.$store.state.jobs }} -->
 		<ul class="post-list">
-			<li v-for="job in this.$store.state.jobs" :key="job.id">
+			<li v-for="(item, index) in this.$store.state.jobs" :key="item.index">
         <div class="row-tit">
-          <a :href="job.url">{{ job.title }}</a> <small class="domain">({{ job.domain }})</small>
+          {{ index + 1 }}.
+          <a :href="item.url" target="_blank">{{ item.title }}</a>
+          <template v-if="item.domain">
+            <small class="domain">({{ item.domain }})</small>  
+          </template>
         </div>
         <div class="row-cmt">
           <small class="">
-            {{ job.time_ago }}
+            {{ item.time_ago }}
           </small>
         </div>
 			</li>
@@ -28,22 +32,5 @@
 </script>
 
 <style lang="scss" scoped>
-.sec.post {
-  // background: #f6f6ef;
-  padding: 5px 10px;
-	.post-list {
-    > li {
-      padding: 2.5px 0;
-      line-height: 1.5;
-      .row-tit {
-        .domain {margin-left: 5px;}
-      }
-      .domain,
-      .row-cmt {
-        font-size: 14px;
-        color: $fg-gray;
-      }
-    }
-  }
-}
+  @import '../scss/listview.scss';
 </style>

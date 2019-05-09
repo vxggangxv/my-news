@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <tool-bar></tool-bar>
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -46,4 +48,15 @@
   }
 
   .sec {position: relative;}
+
+  .fade-enter-active, .fade-leave-active {
+    // transition: all .5s;
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    opacity: 0;
+  }
 </style>
