@@ -7,9 +7,8 @@
           {{ index + 1 }}.
           <a :href="item.url">{{ item.title }}</a> 
           <template v-if="item.domain">
-            <small class="domain">({{ item.domain }})</small>  
+            <a :href="'//' + item.domain" target="_blank" class="domain">({{ item.domain }})</a>  
           </template>
-          <!-- <router-link :to="'/item/' + item.id">{{ item.title }}</router-link> <small class="domain">({{ item.domain }})</small> -->
         </div>
         <div class="row-cmt">
           <small class="">

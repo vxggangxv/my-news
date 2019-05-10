@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="inner fixed">
-			<h1 class="h-logo"><a href="/"><img src="../assets/logo.png" alt="logo" class="logo"></a></h1>
+			<h1 class="h-logo"><a href="/"><img src="../assets/logo.svg" alt="logo" class="logo"></a></h1>
 			<nav class="gnb">
 				<h1 class="text-hide">GNB 메뉴</h1>
 				<div class="menu">

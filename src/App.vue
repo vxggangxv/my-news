@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <tool-bar></tool-bar>
-    <transition name="fade">
+    <transition name="routing-fade" mode="out-in">
       <router-view></router-view>
     </transition>
   </div>
@@ -47,16 +47,38 @@
     z-index: 999;
   }
 
-  .sec {position: relative;}
+  .sec {
+    position: relative;
+  }
 
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     // transition: all .5s;
     transition: opacity .5s;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+  .fade-enter,
+  .fade-leave-to
+
+  /* .fade-leave-active below version 2.1.8 */
+    {
     // position: absolute;
     // top: 0;
     // left: 0;
+    opacity: 0;
+  }
+
+  /* Router Transition */
+  .routing-fade-enter-active,
+  .routing-fade-leave-active {
+    transition: opacity .3s ease;
+  }
+
+  .routing-fade-enter,
+  .routing-fade-leave-to
+
+  /* .routing-fade-leave-active below version 2.1.8 */
+    {
     opacity: 0;
   }
 </style>
