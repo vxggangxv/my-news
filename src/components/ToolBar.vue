@@ -1,7 +1,9 @@
 <template>
 	<header class="header">
 		<div class="inner fixed">
-			<h1 class="h-logo"><a href="/"><img src="../assets/logo.svg" alt="logo" class="logo"></a></h1>
+			<h1 class="h-logo">
+				<a href="/" class="logo"><logo/></a>
+			</h1>
 			<nav class="gnb">
 				<h1 class="text-hide">GNB 메뉴</h1>
 				<div class="menu">
@@ -18,8 +20,12 @@
 </template>
 
 <script>
-	export default {
+import Logo from '../assets/logo.svg';
 
+	export default {
+		components: {
+			Logo
+		}
 	}
 </script>
 
@@ -29,6 +35,7 @@
 		$z: 10;
 		$ht: 50px;
 		height: $ht;
+		overflow: hidden;
 		color: #fff;
 		&, .inner {
 			z-index: $z;
@@ -46,13 +53,13 @@
 			// vertical-align: middle;
 		}
 		.h-logo {
-			// display: inline-block;
-			.logo {
+			a.logo {
+				$wt: 30px;
+				display: inline-block;
 				position: relative;
 				margin-right: 20px;
-				width: 30px;
-				padding: 2px 4px;
-				background: #fff;
+				width: $wt;
+				height: $wt;
 				vertical-align: middle;
 			}
 		}

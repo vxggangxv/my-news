@@ -1,20 +1,36 @@
 <template>
   <div id="app">
+    <progress-bar :loading="loading"></progress-bar>
     <tool-bar></tool-bar>
     <transition name="routing-fade" mode="out-in">
-      <router-view></router-view>
+      <router-view @on:progress="onProgress" @off:progress="offProgress"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-  import ToolBar from './components/ToolBar.vue';
+import ToolBar from './components/ToolBar.vue';
+import ProgressBar from './components/ProgressBar.vue';
 
-  export default {
-    components: {
-      ToolBar,
+export default {
+  components: {
+    ToolBar,
+    ProgressBar,
+  },
+  data() {
+    return {
+      loading: false,
     }
-  }
+  },
+  methods: {
+    onProgress() {
+      this.loading = true;
+    },
+    offProgress() {
+      this.loading = false;
+    }
+  },
+}
 </script>
 
 <style lang="scss">
@@ -24,12 +40,12 @@
   }
 
   a,
-  a:active,
   a:focus {
     text-decoration: none;
     color: inherit;
   }
 
+  a:active,
   a:hover {
     text-decoration: underline;
   }
@@ -49,23 +65,6 @@
 
   .sec {
     position: relative;
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    // transition: all .5s;
-    transition: opacity .5s;
-  }
-
-  .fade-enter,
-  .fade-leave-to
-
-  /* .fade-leave-active below version 2.1.8 */
-    {
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    opacity: 0;
   }
 
   /* Router Transition */

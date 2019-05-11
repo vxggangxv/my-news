@@ -24,16 +24,14 @@
 
   export default {
     created() {
+      this.$emit('on:progress');
+      this.$store.dispatch('FETCH_ASK')
+        .then(() => this.$emit('off:progress'))
+        .catch(() => console.log('fail'));
+        
       // fetchAsk()
       //   .then(response => console.log(response))
       //   .catch(error => console.log(error));
-      this.$store.dispatch('FETCH_ASK')
-        .then(() => console.log('sucess'))
-        .catch(() => console.log('fail'));
-      
-      // this.$store.dispatch('FETCH_ASK')
-      //     .then(() => console.log('sucess'))
-      //     .catch(() => console.log('fail'));
     }
   }
 </script>

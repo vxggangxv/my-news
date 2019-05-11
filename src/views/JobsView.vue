@@ -24,8 +24,9 @@
 <script>
   export default {
     created() {
+      this.$emit('on:progress');
       this.$store.dispatch('FETCH_JOBS')
-        .then(() =>  console.log('sucess'))
+        .then(() => this.$emit('off:progress'))
         .catch(() => console.log('fail'));
     }
   }
