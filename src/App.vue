@@ -58,7 +58,7 @@ export default {
   }
 
   .fixed {
-    position: fixed;
+    position: fixed !important;
     width: 100%;
     z-index: 999;
   }
