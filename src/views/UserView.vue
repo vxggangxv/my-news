@@ -1,26 +1,35 @@
 <template>
   <section class="sec user">
-    <p class="dl"><span class="dt">ID</span> <span class="dot">:</span> <span class="dd">{{ fetchedUser.id }}</span></p>
-    <p class="dl"><span class="dt">Karma</span> <span class="dot">:</span> <span class="dd">{{ fetchedUser.karma }}</span></p>
-    <p class="dl"><span class="dt">Joined</span> <span class="dot">:</span> <span class="dd">{{ fetchedUser.created }}</span></p>
+    <h1 class="text-hide">User Profile</h1>
+    <user-profile :userInfo="fetchedUser">
+      <div slot="userName">{{ fetchedUser.id }}</div>
+      <span slot="userKarma">{{ fetchedUser.karma }} karma</span>
+    </user-profile>
   </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import UserProfile from '../components/UserProfile.vue';
 
-  export default {
-    computed: {
-      ...mapGetters(['fetchedUser'])
-    },
-    created() {
-      const userId = this.$route.params.id;
-      this.$store.dispatch('FETCH_USER', userId);
-      // fetchUser(userId)
-      //   .then(res => console.log(res))
-      //   .catch(error => console.log(error));
-    }
-  }
+export default {
+  components: {
+    UserProfile,
+  },
+  created() {
+    this.$emit('on:progress');
+    const userId = this.$route.params.id;
+    this.$store.dispatch('FETCH_USER', userId)
+      .then(() => this.$emit('off:progress'))
+      .catch(() => console.log('fail'));
+    // fetchUser(userId)
+    //   .then(res => console.log(res))
+    //   .catch(error => console.log(error));
+  },
+  computed: {
+    ...mapGetters(['fetchedUser']),
+  },
+}
 </script>
 
 <style lang="scss" scoped>

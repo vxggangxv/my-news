@@ -30,10 +30,16 @@ function fetchUser(id) {
 	return axios.get(url);
 }
 
+function fetchList(type) {
+	const url = `https://api.hnpwa.com/v0/${type}/1.json`;
+	return axios.get(url);
+}
+
 export {
 	fetchNews,
 	fetchAsk,
 	fetchJobs,
 	fetchItem,
 	fetchUser,
+	fetchList,
 }

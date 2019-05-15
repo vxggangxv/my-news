@@ -1,94 +1,61 @@
 <template>
-  <div>
-    <section class="sec item">
-      <div class="user-container">
-        <i class="fas fa-user-circle"></i>
-        <div class="user-desc">
-          <router-link :to="'/user/' + userName">{{ userName }}</router-link>
-          <p class="time">{{ userTimeAgo }}</p>
-        </div>
-      </div>
+  <section class="sec item">
+    <div class="ask-container">
+      <user-profile :user-info="fetchedItem"></user-profile>
       <h1 class="q-tit">{{ userQuestion }}</h1>
-      <div class="q-content" v-html="fetchedItem.content"></div>
-
-        <!-- <div>
-        <section class="header-container">
-          <div class="user-container">
-            <div>
-              <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="user-description">
-              <router-link :to="'/user/' + userName">{{ userName }}</router-link>
-              <div class="time">{{ userTimeAgo }}</div>
-            </div>
-          </div>
-          <h2>{{ userQuestion }}</h2>
-        </section>
-        <section>
-          <div v-html="userContent" class="content"></div>
-        </section>
-      </div> -->
-    </section>
-
-  </div>
+      <div class="q-content" v-html="userContent"></div>
+    </div>
+    <div class="comment-container">
+      <h2>Comments</h2>
+      <div v-for="item in fetchedItem.comments" :key="item.index" class="content">
+        <user-profile :user-info="item"></user-profile>
+        <div v-html="item.content"></div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import UserProfile from '../components/UserProfile.vue';
 
-  export default {
-    computed: {
-      ...mapGetters(['fetchedItem']),
-      userName() {
-        return this.fetchedItem.user;
-      },
-      userTimeAgo() {
-        return this.fetchedItem.time_ago;
-      },
-      userQuestion() {
-        return this.fetchedItem.title;
-      },
-      userContent() {
-        return this.fetchedItem.content;
-      },
-    },
-    created() {
-      const itemId = this.$route.params.id;
-      this.$store.dispatch('FETCH_ITEM', itemId)
-        .then(() => console.log('sucess'))
-        .catch(() => console.log('fail'));
-      // fetchItem(itemId)
-      //   .then(res => console.log(res))
-      //   .catch(error => console.log(error));
-    }
-  }
+export default {
+  components: {
+    UserProfile,
+  },
+  created() {
+    this.$emit('on:progress');
+    const itemId = this.$route.params.id;
+    this.$store.dispatch('FETCH_ITEM', itemId)
+      .then(() => this.$emit('off:progress'))
+      .catch(() => console.log('fail'));
+    // fetchItem(itemId)
+    //   .then(res => console.log(res))
+    //   .catch(error => console.log(error));
+  },
+  computed: {
+    ...mapGetters([
+      'fetchedItem', 'userName', 'userTimeAgo', 'userQuestion', 'userContent', 'contentPoints',
+    ]),
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 .sec.item {
   // background: #f6f6ef;
   padding: 5px 10px;
+  line-height: 1.3;
+}
+.ask-container {
+
+}
+.comment-container {
   color: $fg-gray;
-  .user-container {
-    display: flex;
-    align-items: center;
-    padding: 15px 0;
-    line-height: 1.3;
-    font-size: 14px;
-    // justify-content: space-between;
-    .fa-user-circle {
-      // color: #03C2E6;
-      margin-right: 10px;
-      font-size: 40px;
-      color: #FF6500;
-    }
-  }
-  .q-tit {
-    margin-bottom: 10px;
-  }
-  .q-content {
-    line-height: 1.3;
-    word-break: keep-all;
+  h2 {
+    border-top: 1px solid #e9e9e9;
+    margin-top: 50px;
+    padding: 20px 0 20px;
   }
 }
 </style>
