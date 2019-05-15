@@ -1,6 +1,7 @@
 <template>
 	<header class="header">
-		<div class="inner fixed">
+		<!-- <div class="inner fixed"> -->
+		<div class="inner" :class="{ 'fixed': isFixed }" ref="appHeader">
 			<h1 class="h-logo">
 				<a href="/" class="logo"><logo/></a>
 			</h1>
@@ -20,62 +21,79 @@
 </template>
 
 <script>
-import Logo from '../assets/logo.svg';
+import Logo from '@/assets/logo.svg';
 
-	export default {
-		components: {
-			Logo
-		}
+export default {
+  components: {
+    Logo
+  },
+  data() {
+    return {
+      navHeight: 0,
+      isFixed: false,
+    }
+  },
+  methods: {
+    checkHeight() {
+      this.isFixed = window.scrollY > this.navHeight ? true : false;
+    }
+  },
+	mounted() {
+    this.navHeight = this.$refs.appHeader.offsetHeight;
+		window.addEventListener('scroll', this.checkHeight);
+	},
+	beforeDestroy() {
+		window.removeEventListener('scroll', this.checkHeight);
 	}
+}
 </script>
 
 <style lang="scss" scoped>
-	.header {
-		position: relative;
-		$z: 10;
-		$ht: 50px;
+.header {
+	position: relative;
+	$z: 10;
+	$ht: 50px;
+	height: $ht;
+	overflow: hidden;
+	color: #fff;
+	&, .inner {
+		z-index: $z;
+		box-sizing: border-box;
+	}
+	.inner {
+		display: flex;
+		align-items: center;
 		height: $ht;
-		overflow: hidden;
-		color: #fff;
-		&, .inner {
-			z-index: $z;
-			box-sizing: border-box;
+		padding: 8px 10px 10px;
+		background-color: #42b883;
+		&.fixed {
+			background-color: rgba(66, 184, 131, 0.95);
 		}
-		.inner {
-			display: flex;
-			align-items: center;
-			height: $ht;
-			padding: 8px 10px 10px;
-			background-color: #42b883;
-		}
-		.h-logo,
-		.gnb {
-			// vertical-align: middle;
-		}
-		.h-logo {
-			a.logo {
-				$wt: 30px;
-				display: inline-block;
-				position: relative;
-				margin-right: 20px;
-				width: $wt;
-				height: $wt;
-				vertical-align: middle;
-			}
-		}
-		.gnb {
+	}
+	.h-logo {
+		a.logo {
+			$wt: 30px;
 			display: inline-block;
-			.menu {
-				> a {
-					margin: 0 10px;
-          &:first-child {
-            margin-left: 0;
-          }
-					&:active {
-						color: #35495e;
-					}
+			position: relative;
+			margin-right: 20px;
+			width: $wt;
+			height: $wt;
+			vertical-align: middle;
+		}
+	}
+	.gnb {
+		display: inline-block;
+		.menu {
+			> a {
+				margin: 0 10px;
+				&:first-child {
+					margin-left: 0;
+				}
+				&:active {
+					color: #35495e;
 				}
 			}
 		}
 	}
+}
 </style>
