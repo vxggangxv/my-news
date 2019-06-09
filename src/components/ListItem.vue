@@ -18,8 +18,7 @@
         <div class="row-cmt">
           <small class="">
             {{ item.time_ago }}
-            by
-            <router-link v-if="item.user" :to="'/user/' + item.user">{{ item.user }}</router-link>
+            <router-link v-if="item.user" :to="'/user/' + item.user">by {{ item.user }}</router-link>
           </small>
         </div>
 			</li>
