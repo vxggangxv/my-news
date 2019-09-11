@@ -8,7 +8,13 @@
 			padding: 2.5px 0;
 			line-height: 1.5;
 
+			$pl : 26px;
 			.row-tit {
+				position: relative;
+				padding-left: $pl;
+				.post-no {
+					@include pos($type: absolute, $left: 0);
+				}
 				.domain {
 					margin-left: 5px;
 				}
@@ -21,8 +27,26 @@
 			}
 
 			.row-cmt {
-				padding-left: 17px;
+				padding-left: $pl;
 			}
+		}
+	}
+
+	.btn-cover {
+		margin-top: 15px;
+		text-align: center;
+		.page-count {
+			@include va;
+			margin: 0px 10px;
+			top: -1px;
+			font-size: 14px;
+		}
+		button {
+			width: auto;
+			border-radius: 0;
+			// background-color: #fff;
+			// border: 1px solid $btn-gray;
+			// color: $btn-gray;
 		}
 	}
 }

@@ -42,9 +42,11 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '@/scss/basic.scss';
+
   body {
     font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
-    color: $primary-color;
+    color: $font-color;
   }
 
   a,
@@ -88,4 +90,18 @@ export default {
     {
     opacity: 0;
   }
+  
+  #app {
+    position: relative;
+    max-width: 768px;
+    margin: 0 auto;
+
+    border: 1px solid #d5d5d5;
+    border-top: none;
+    min-height: 568px;
+  }
+  
+  .r-link {
+		text-decoration: underline;
+	}
 </style>

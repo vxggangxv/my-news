@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../scss/listview.scss';
+  @import '@/scss/listview.scss';
 </style>

@@ -4,7 +4,7 @@
 			<i class="fas fa-user-circle"></i>
 			<div class="user-desc">
 				<slot name="userName"></slot>
-				<router-link :to="'/user/' + userInfo.user">{{ userInfo.user }}</router-link>
+				<router-link :to="'/user/' + userInfo.user" class="r-link">{{ userInfo.user }}</router-link>
 				<p class="time">
 					{{ userInfo.time_ago || 'Joined ' + userInfo.created + ',' }}
 					<span v-if="userInfo.points">, {{ userInfo.points }} points</span>

@@ -5,6 +5,7 @@
       <h1 class="q-tit">{{ userQuestion }}</h1>
       <div class="q-content" v-html="userContent"></div>
     </div>
+    <div class="division"></div>
     <div class="comment-container">
       <h2>Comments</h2>
       <div v-for="item in fetchedItem.comments" :key="item.index" class="content">
@@ -50,12 +51,25 @@ export default {
 .ask-container {
 
 }
+.division {
+  margin: 20px 0px;
+  @include size(100%, 1px);
+  background-color: #e9e9e9;
+}
 .comment-container {
   color: $fg-gray;
+  word-break: keep-all;
   h2 {
-    border-top: 1px solid #e9e9e9;
-    margin-top: 50px;
-    padding: 20px 0 20px;
+    margin-bottom: 5px;
+    line-height: 1;
+  }
+  .content {
+    padding-left: 10px;
+    & + .content {
+      margin-top: 15px;
+      // padding-top: 15px;
+      border-top: 1px solid #e9e9e9;
+    }
   }
 }
 </style>

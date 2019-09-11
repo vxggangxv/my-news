@@ -3,7 +3,10 @@
 		<!-- <div class="inner fixed"> -->
 		<div class="inner" :class="{ 'fixed': isFixed }" ref="appHeader">
 			<h1 class="h-logo">
-				<a href="/" class="logo"><logo/></a>
+				<a href="/" class="logo">
+					<span class="logo-bdr"><logo /></span>
+					<span class="logo-lbl">Hacker News</span>
+				</a>
 			</h1>
 			<nav class="gnb">
 				<h1 class="text-hide">GNB 메뉴</h1>
@@ -21,79 +24,101 @@
 </template>
 
 <script>
-import Logo from '@/assets/logo.svg';
+	import Logo from '@/assets/logo.svg';
 
-export default {
-  components: {
-    Logo
-  },
-  data() {
-    return {
-      navHeight: 0,
-      isFixed: false,
-    }
-  },
-  methods: {
-    checkHeight() {
-      this.isFixed = window.scrollY > this.navHeight ? true : false;
-    }
-  },
-	mounted() {
-    this.navHeight = this.$refs.appHeader.offsetHeight;
-		window.addEventListener('scroll', this.checkHeight);
-	},
-	beforeDestroy() {
-		window.removeEventListener('scroll', this.checkHeight);
+	export default {
+		components: {
+			Logo
+		},
+		data() {
+			return {
+				navHeight: 0,
+				isFixed: false,
+			}
+		},
+		methods: {
+			checkHeight() {
+				this.isFixed = window.scrollY > this.navHeight ? true : false;
+			}
+		},
+		mounted() {
+			this.navHeight = this.$refs.appHeader.offsetHeight;
+			window.addEventListener('scroll', this.checkHeight);
+		},
+		beforeDestroy() {
+			window.removeEventListener('scroll', this.checkHeight);
+		}
 	}
-}
 </script>
 
 <style lang="scss" scoped>
-.header {
-	position: relative;
-	$z: 10;
-	$ht: 50px;
-	height: $ht;
-	overflow: hidden;
-	color: #fff;
-	&, .inner {
-		z-index: $z;
-		box-sizing: border-box;
-	}
-	.inner {
-		display: flex;
-		align-items: center;
+	.header {
+		position: relative;
+		$z: 10;
+		$ht: 50px;
 		height: $ht;
-		padding: 8px 10px 10px;
-		background-color: #42b883;
-		&.fixed {
-			background-color: rgba(66, 184, 131, 0.95);
+		overflow: hidden;
+		color: #fff;
+
+		&,
+		.inner {
+			z-index: $z;
+			box-sizing: border-box;
+			max-width: 768px;
 		}
-	}
-	.h-logo {
-		a.logo {
-			$wt: 30px;
-			display: inline-block;
-			position: relative;
-			margin-right: 20px;
-			width: $wt;
-			height: $wt;
-			vertical-align: middle;
+
+		.inner {
+			display: flex;
+			align-items: center;
+			height: $ht;
+			padding: 8px 10px 10px;
+			background-color: #42b883;
+
+			&.fixed {
+				background-color: rgba(66, 184, 131, 0.95);
+			}
 		}
-	}
-	.gnb {
-		display: inline-block;
-		.menu {
-			> a {
-				margin: 0 10px;
-				&:first-child {
-					margin-left: 0;
+
+		.h-logo {
+			.logo {
+				margin-right: 30px;
+				> * {
+					@include va;
 				}
-				&:active {
-					color: #35495e;
+				.logo-bdr {
+					$wt: 30px;
+					display: inline-block;
+					position: relative;
+					width: $wt;
+					height: $wt;
+					vertical-align: middle;
+				}
+				.logo-lbl {
+					margin-left: 5px;
+					font-weight: 700;
+				}
+			}
+		}
+
+		.gnb {
+			display: inline-block;
+
+			.menu {
+				>a {
+					margin: 0 10px;
+					@include screen-max(320px) {
+						margin: 0 5px;
+					}
+
+					&:first-child {
+						margin-left: 0;
+					}
+
+					&:active {
+						color: #35495e;
+					}
 				}
 			}
 		}
 	}
-}
 </style>

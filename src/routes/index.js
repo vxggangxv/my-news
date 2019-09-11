@@ -3,10 +3,10 @@ import VueRouter from 'vue-router';
 import {
 	UserView,
 	ItemView
-} from '../views';
-import createListView from '../views/CreateListView';
-import bus from '../utils/bus.js';
-import store from '../store';
+} from '@/views';
+import createListView from '@/views/CreateListView';
+import bus from '@/utils/bus.js';
+import store from '@/store';
 
 Vue.use(VueRouter);
 

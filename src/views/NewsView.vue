@@ -15,11 +15,12 @@ export default {
 		this.$store.dispatch('FETCH_NEWS')
       .then(() => this.$emit('off:progress'))
       // .then(() => console.log('sucess'))
+      // eslint-disable-next-line no-console
       .catch(() => console.log('fail'));
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '../scss/listview.scss';
+  @import '@/scss/listview.scss';
 </style>
